@@ -1,0 +1,15 @@
+.header__nav-menu {
+    display: flex;
+    margin: 0;
+    padding: 6px 0 0;
+    align-self: flex-start;
+}
+
+@media (max-width: 500px) {
+    .header__nav-menu {
+        flex-direction: column;
+        justify-content: flex-start;
+        margin: 0 auto;
+        padding: 0;
+    }
+}

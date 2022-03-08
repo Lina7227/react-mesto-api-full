@@ -1,0 +1,7 @@
+.header__column {
+    flex-direction: column-reverse;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 30px 0 0;
+    width: 100%;
+}

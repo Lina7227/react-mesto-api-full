@@ -1,0 +1,33 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="120" height="120" fill="#E5E5E5"/>
+<g id="SUCCESS" clip-path="url(#clip0_0_1)">
+<rect width="1280" height="720" transform="translate(-580 -255)" fill="black"/>
+<g id="Field 2">
+<line id="Line 2.1" x1="-119" y1="86" x2="239" y2="86" stroke="#CCCCCC" stroke-width="2"/>
+</g>
+<g id="Field 1">
+<line id="Line 2" x1="-119" y1="29" x2="239" y2="29" stroke="#CCCCCC" stroke-width="2"/>
+</g>
+<rect id="Overlay" opacity="0.5" x="-580" y="-255" width="1280" height="720" fill="black"/>
+<g id="Form">
+<g id="Rectangle" filter="url(#filter0_d_0_1)">
+<rect x="-155" y="-60" width="430" height="330" rx="10" fill="white"/>
+</g>
+<path id="Union" fill-rule="evenodd" clip-rule="evenodd" d="M117 60C117 91.4802 91.4802 117 60 117C28.5198 117 3 91.4802 3 60C3 28.5198 28.5198 3 60 3C91.4802 3 117 28.5198 117 60ZM120 60C120 93.1371 93.1371 120 60 120C26.8629 120 0 93.1371 0 60C0 26.8629 26.8629 0 60 0C93.1371 0 120 26.8629 120 60ZM57.5502 76.888L86.7676 48.888L81.2324 43.112L54.4277 68.7999L39.3496 57.8561L34.6504 64.3305L52.433 77.2372L55.1375 79.2001L57.5502 76.888Z" fill="black"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_0_1" x="-180" y="-85" width="480" height="380" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="12.5"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_1"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_1" result="shape"/>
+</filter>
+<clipPath id="clip0_0_1">
+<rect width="1280" height="720" fill="white" transform="translate(-580 -255)"/>
+</clipPath>
+</defs>
+</svg>

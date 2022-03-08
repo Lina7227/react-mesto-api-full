@@ -1,0 +1,12 @@
+.popup__content_edit {
+    max-width: 430px;
+    width: 100%;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+}
+
+@media (max-width: 600px) {
+    .popup__content_edit {
+        width: 282px;
+    }
+}

@@ -1,0 +1,20 @@
+.header__nav-item {
+    color: #fff;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 400;
+    text-decoration: none;
+    transition: opacity .3s ease;
+    padding: 0;
+    margin: 0;
+}
+
+.header__nav-item:hover {
+    opacity: 0.6;
+}
+
+@media (max-width: 500px) {
+    .header__nav-item {
+        text-align: center;
+    }
+}

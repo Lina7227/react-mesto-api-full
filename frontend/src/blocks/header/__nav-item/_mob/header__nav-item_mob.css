@@ -1,0 +1,5 @@
+@media (max-width: 500px){
+    .header__nav-item_mob {
+        margin: 0 30px 0 auto;
+    }
+}

@@ -1,0 +1,11 @@
+.popup__close_form {
+    top: -40px;
+    right: -40px;
+}
+
+@media (max-width: 600px) {
+    .popup__close_form {
+        top: -36px;
+        right: 0;
+    }
+}

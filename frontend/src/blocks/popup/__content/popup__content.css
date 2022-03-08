@@ -1,0 +1,16 @@
+.popup__content {
+    position: relative;
+    padding: 0;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+     
+}
+
+@media (max-width: 600px) {
+    .popup__content {
+        padding: 0;
+        margin: 0;
+    }
+}

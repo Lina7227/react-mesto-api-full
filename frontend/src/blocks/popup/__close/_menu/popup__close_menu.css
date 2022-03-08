@@ -1,0 +1,14 @@
+.popup__close_menu {
+    top: unset;
+    right: unset;
+    position: unset;
+    outline: none;
+    display: none;
+    align-self: center;
+    transition: opacity .3s;
+    padding: 0;
+}
+
+.popup__close_menu:hover {
+    opacity: 0.6;
+}

@@ -1,0 +1,16 @@
+.element__emotion {
+    max-width: 22px;
+    width: 100%;
+    height: 19px;
+    margin: 0;
+    background-image: url("/src/images/heart.svg");
+    background-color: inherit;
+    border: none;
+    cursor: pointer;
+    transition: 2s;
+    background-size: 100% 100%;
+}
+
+.element__emotion:hover {
+    opacity: 0.5;
+}

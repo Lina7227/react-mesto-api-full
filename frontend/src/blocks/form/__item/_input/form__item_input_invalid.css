@@ -1,0 +1,3 @@
+.form__item_input_invalid {
+    border-bottom: 2px solid red;
+}

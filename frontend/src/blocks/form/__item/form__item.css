@@ -1,0 +1,19 @@
+.form__item {
+    max-width: 358px;
+    width: 100%;
+    border: 0;
+    font-size: 14px;
+    line-height: 17px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgba(0, 0, 0, .2);
+    margin: 0;
+    padding: 30px 0 10px;
+}
+
+
+@media (max-width: 600px) {
+    .form__item {
+        max-width: 238px;
+    }
+}

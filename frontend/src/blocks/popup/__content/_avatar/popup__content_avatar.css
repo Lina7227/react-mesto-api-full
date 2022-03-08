@@ -1,0 +1,12 @@
+.popup__content_avatar {
+    max-width: 430px;
+    width: 100%;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+}
+
+@media (max-width: 600px) {
+    .popup__content_avatar {
+        width: 282px;
+    }
+}

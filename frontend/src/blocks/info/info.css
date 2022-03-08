@@ -1,0 +1,17 @@
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 358px;
+    border: 0;
+    padding: 34px 36px 37px;
+    margin: 0;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .info {
+        width: 238px;
+        padding: 25px 22px;
+    }
+}
