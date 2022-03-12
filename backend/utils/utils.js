@@ -1,5 +1,6 @@
 const corsOptions = [
   'https://api.lina.front.nomoredomains.work',
+  'https://lina.front.nomoredomains.xyz',
   'http://localhost:3001',
   'http://localhost:3000',
   'https://localhost:3001',

@@ -1,4 +1,4 @@
-export const BASE_URL  = 'https://api.lina.front.nomoredomains.work';
+export const BASE_URL  = 'https://lina.front.nomoredomains.xyz';
 
 // возврат ответа сервера об ошибке
 const handleResponse = (res) => {
