@@ -1,60 +1,52 @@
-class Auth {
-    constructor({baseUrl}) {
-        this._baseUrl = baseUrl;
-    }
+export const BASE_URL  = 'https://api.lina.front.nomoredomains.work';
 
-    // возврат ответа сервера об ошибке
-    handleResponse = (res) => {
-        if(res.ok){
-            return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`)
+// возврат ответа сервера об ошибке
+const handleResponse = (res) => {
+    if(res.ok){
+        return res.json();
     }
-
-    register({email, password}) {
-        return fetch(`${this._baseUrl}/signup`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              "password": password,
-              "email": email
-            }),
-        })
-        .then(this.handleResponse)
-    }
-
-    login({email, password}) {
-        return fetch(`${this._baseUrl}/signin`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              "password": password,
-              "email": email
-            }),
-        })
-        .then(this.handleResponse);
-    }
-
-    checkToken(token) {
-        return fetch(`${this._baseUrl}/users/me`, {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${token}`
-            },
-        })
-        .then(this.handleResponse);
-    }
+    return Promise.reject(`Ошибка: ${res.status}`);
 }
 
-const authConfigg = {
-    baseUrl: 'https://auth.nomoreparties.co',
+export const register = ({email, password}) => {
+    return fetch(`${BASE_URL}/signup`, {
+        method: "POST",
+        credentials: 'include',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          "password": password,
+          "email": email
+        }),
+    })
+    .then(response => handleResponse(response));
 }
 
-const auth = new Auth(authConfigg);
+export const login = ({email, password}) => {
+    return fetch(`${BASE_URL}/signin`, {
+        method: "POST",
+        credentials: 'include',
+        headers: {
+          "Accept": "application/json", 
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          "password": password,
+          "email": email
+        }),
+    })
+    .then(response => handleResponse(response));
+}
 
-export default auth;
+export const checkToken = () => {
+    return fetch(`${BASE_URL}/users/me`, {
+      method: "GET",
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        "Content-Type": "application/json",
+      },
+    })
+    .then(response => handleResponse(response));
+}

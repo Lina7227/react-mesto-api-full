@@ -28,7 +28,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike,
 
             <section className="elements">
                 <ul className="elements__table">
-                    {cards.map((card) => (
+                    {cards.slice(0).reverse().map((card) => (
                         
                             <Card
                                 key={card._id}

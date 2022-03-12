@@ -12,9 +12,9 @@ import DeleteCardPopup from './DeleteCardPopup';
 import ProtectedRoute from './ProtectedRoute';
 import Login from './Login';
 import Register from './Register';
-import auth from '../utils/Auth';
+import { register, login, checkToken } from '../utils/Auth';
 import InfoTooltip from './InfoTooltip';
-import { BrowserRouter, Route, Switch, Redirect, useHistory } from 'react-router-dom';
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 
 function App() {
 
@@ -92,7 +92,8 @@ function App() {
       document.removeEventListener('mousedown', handleOverlayClick);
     }
 
-  },[
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    [
     isLuckInfoTooltip,
     isEditAvatarPopupOpen,
     isEditProfilePopupOpen,
@@ -116,7 +117,8 @@ function App() {
       document.removeEventListener('keyup', handleEscapeClick);
     }
 
-  },[
+  }, // eslint-disable-next-line
+    [
     isLuckInfoTooltip,
     isEditAvatarPopupOpen,
     isEditProfilePopupOpen,
@@ -126,20 +128,22 @@ function App() {
 
 
   React.useEffect(() => {
+    setIsLoading(false);
     handleIsToken();
     setLuckInfoTooltip(false);
-  }, [])
+  }, // eslint-disable-next-line
+   [])
 
   function handleIsToken() {
 
-    setIsLoading(true);
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      auth.checkToken(jwt)
+    setIsLoading(false);
+    let jwt = localStorage.getItem("jwt");
+    if (islogOn !== null) {
+      checkToken(jwt)
         .then((res) => {
-          setUserEmail(res.data.email);
+          setUserEmail(res.email);
           setlogOn(true);
-          setIsLoading(false);
+          setIsLoading(true);
           history.push("/");
         })
         .catch(() => {
@@ -153,9 +157,9 @@ function App() {
   }
 
   function handleIsRegister(data) {
-    auth.register(data)
+    register(data)
       .then((res) => {
-        setUserEmail(res.data.email);
+        setUserEmail(res.email);
         setUserPassword(data.password);
         setLuckInfoTooltip(true);
         onInfoTooltipPopup(true);
@@ -167,19 +171,24 @@ function App() {
   }
 
   function handleIsLogin(data) {
-    auth.login(data)
+    login(data)
       .then((res) => {
-        localStorage.setItem("jwt", res.token);
-        handleIsToken();
+        if (res.token) {
+          localStorage.setItem("jwt", res.token);
+          setlogOn(true);
+          handleIsToken();
+          history.push('/');
+        }
+        
       })
-      .catch(() => {
+      .catch(async  () => {
         setLuckInfoTooltip(false);
         onInfoTooltipPopup(true);
       })
   }
 
   function handleSignOut() {
-    setlogOn(false);
+    setlogOn(null);
     history.push("/sign-in");
     localStorage.removeItem("jwt");
     setUserEmail("");
@@ -189,16 +198,18 @@ function App() {
   }
   
   React.useEffect(() => {
-    Promise.all([api.getUser(), api.getInitialCards()])
-      .then(([userData, cards]) => {
-        setCurrentUser(userData);
-        setCards(cards)
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-
-  }, [])
+    if (islogOn !== null) {
+      Promise.all([api.getUser(), api.getInitialCards()])
+        .then(([userData, cards]) => {
+          setCurrentUser(userData);
+          setCards(cards)
+        })
+        .catch(async (err) => {
+          console.log(err);
+        })
+    }
+  }, // eslint-disable-next-line
+   [islogOn])
 
   function handleCardLike(card) {
       
@@ -214,7 +225,8 @@ function App() {
   }
     
   function handleCardDelete(card) {
-    setRemovePopupButtonText('Удаление...')
+    setRemovePopupButtonText('Удаление...');
+    setIsLoading(true);
     api.removeCard(card._id)
       .then(() => {
         const newCards = cards.filter((evt) => evt._id !== card._id);
@@ -231,6 +243,7 @@ function App() {
 
   function handleUpdateUser(user) {
     setProfilePopupButtonText('Сохранение...');
+    setUserEmail(true);
     api.setUser(user)
       .then((user) => {
         setCurrentUser(user);
@@ -246,9 +259,10 @@ function App() {
 
   function handleUpdateAvatar(avatar) {
     setAvatarPopupButtonText('Сохранение...');
+    setUserEmail(true);
     api.setUserAvatar(avatar)
-      .then((avatar) => {
-        setCurrentUser(avatar);
+      .then((user) => {
+        setCurrentUser(user);
         closeAllPopups();
       })
       .catch((err) => {
@@ -261,6 +275,7 @@ function App() {
 
   function handleAddPlaceSubmit(cardNew) {
     setPlacePopupButtonText('Добавление...');
+    setUserEmail(true);
     api.addCard(cardNew)
       .then((cardNew) => {
         setCards([cardNew, ...cards]);
