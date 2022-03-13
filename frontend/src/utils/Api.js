@@ -101,7 +101,7 @@ class Api{
 }
 
 const apiConfigg = {
-    baseUrl: 'https://lina.front.nomoredomains.xyz',
+    baseUrl: 'https://api.lina.front.nomoredomains.work',
     headers: {
         'Content-Type': 'application/json',
     }
