@@ -173,8 +173,8 @@ function App() {
   function handleIsLogin(data) {
     login(data)
       .then((res) => {
-        if (res.token) {
-          localStorage.setItem("jwt", res.token);
+        if (res.jwt) {
+          localStorage.setItem("jwt", res.jwt);
           setlogOn(true);
           handleIsToken();
           history.push('/');
