@@ -198,13 +198,14 @@ function App() {
   }
   
   React.useEffect(() => {
+
     if (islogOn !== null) {
-      Promise.all([api.getUser(localStorage.getItem("jwt")), api.getInitialCards(localStorage.getItem("jwt"))])
+      Promise.all([api.getUser(), api.getInitialCards()])
         .then(([userData, cards]) => {
           setCurrentUser(userData);
           setCards(cards)
         })
-        .catch(async (err) => {
+        .catch((err) => {
           console.log(err);
         })
     }
@@ -213,7 +214,7 @@ function App() {
 
   function handleCardLike(card) {
       
-    const isLiked = card.likes.some(like => like._id === currentUser._id);
+    const isLiked = card.likes.some(like => like === currentUser._id);
       
     api.changeCardLikeStatus(card._id, !isLiked)
       .then((newCard) => {
@@ -273,14 +274,13 @@ function App() {
       })
   }
 
-  function handleAddPlaceSubmit(cardNew) {
+  function handleAddPlaceSubmit(card) {
     setPlacePopupButtonText('Добавление...');
     setUserEmail(true);
-    api.addCard(cardNew)
+    api.addCard(card)
       .then((cardNew) => {
-        setCards([cardNew, ...cards]);
+        setCards([cardNew, cards]);
         closeAllPopups();
-
       })
       .catch((err) => {
         console.log(err);
