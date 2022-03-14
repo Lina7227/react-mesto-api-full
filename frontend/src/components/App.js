@@ -199,7 +199,7 @@ function App() {
   
   React.useEffect(() => {
     if (islogOn !== null) {
-      Promise.all([api.getUser(), api.getInitialCards()])
+      Promise.all([api.getUser(localStorage.getItem("jwt")), api.getInitialCards(localStorage.getItem("jwt"))])
         .then(([userData, cards]) => {
           setCurrentUser(userData);
           setCards(cards)
