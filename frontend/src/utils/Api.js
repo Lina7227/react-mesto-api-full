@@ -127,11 +127,8 @@ class Api{
 }
 
 const apiConfigg = {
-    // baseUrl: 'https://api.lina.front.nomoredomains.work',
-    baseUrl: 'http://localhost:3000',
-    headers: {
-        'Content-Type': 'application/json',
-    }
+    baseUrl: 'https://api.lina.front.nomoredomains.work',
+    // baseUrl: 'http://localhost:3000',
 }
 
 // отправка запросов
