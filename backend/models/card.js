@@ -23,8 +23,8 @@ const cardSchema = new mongoose.Schema({
     type: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'user',
+      default: [],
     }],
-    default: [],
   },
   createdAt: {
     type: Date,

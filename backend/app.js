@@ -9,8 +9,9 @@ const { errorsHandler } = require('./middlewares/errorsHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const corsOptions = require('./utils/utils');
 
-const { PORT = 3000 } = process.env;
 const app = express();
+
+const { NODE_ENV, PORT } = process.env;
 
 app.use(corsOptions);
 
@@ -39,6 +40,4 @@ app.use(router);
 app.use(errorLogger);
 app.use(errors());
 app.use(errorsHandler);
-app.listen(PORT, () => {
-
-});
+app.listen(NODE_ENV === 'production' ? PORT : 3000);
