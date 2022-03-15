@@ -34,8 +34,8 @@ class Api{
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                name: `${data.name}`,
-                about: `${data.about}`,
+                name: data.name,
+                about: data.about,
             })
         })
         .then(this.handleResponse)
@@ -52,9 +52,7 @@ class Api{
                 'authorization':`Bearer ${token}`,
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                avatar: data.avatar,
-            })
+            body: JSON.stringify(data)
         })
         .then(this.handleResponse)
     }
@@ -75,7 +73,7 @@ class Api{
     }
 
     // сохранение карточек
-    addCard(data){
+    addCard(card){
         const token = localStorage.getItem("jwt");
         return fetch(`${this._baseUrl}/cards`, {
           method:'POST',
@@ -85,8 +83,8 @@ class Api{
             'Content-Type': 'application/json',
             },
           body: JSON.stringify({
-            name: `${data.name}`,
-            link: `${data.link}`,
+            name: card.name,
+            link: card.link,
           })
         })
         .then(this.handleResponse)

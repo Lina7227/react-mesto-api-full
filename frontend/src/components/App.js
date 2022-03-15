@@ -245,6 +245,7 @@ function App() {
   function handleUpdateUser(user) {
     setProfilePopupButtonText('Сохранение...');
     setUserEmail(true);
+
     api.setUser(user)
       .then((user) => {
         setCurrentUser(user);
@@ -256,6 +257,7 @@ function App() {
       .finally(() => {
         setProfilePopupButtonText('Сохранить');
       })
+
   }
 
   function handleUpdateAvatar(avatar) {
@@ -279,7 +281,7 @@ function App() {
     setUserEmail(true);
     api.addCard(card)
       .then((cardNew) => {
-        setCards([cardNew, cards]);
+        setCards([cardNew, ...cards]);
         closeAllPopups();
       })
       .catch((err) => {

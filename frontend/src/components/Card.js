@@ -14,6 +14,8 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
     
     const isLiked = card.likes.some(like => like === currentUser._id);
 
+    // const isLiked = (card.likes === []) ? false : card.likes.some((like) => like === currentUser._id);
+
     const cardLikeButtonClassName = `element__emotion ${isLiked ? 'element__emotion_active' : 'element__emotion'}`;
 
     function handleLike() {
@@ -49,7 +51,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
                         className={cardLikeButtonClassName}
                         onClick={handleLike}
                     ></button>
-                    <h3 className="element__number">{card.likes.length}</h3>
+                    <h3 className="element__number">{card.likes.lenght}</h3>
                 </div>
                 
             </div>
