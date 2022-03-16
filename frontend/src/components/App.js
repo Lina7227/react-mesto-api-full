@@ -24,7 +24,7 @@ function App() {
   const [isDeleteCardPopup, onDeleteCardPopup] = React.useState(false);
   const [isInfoTooltipPopup, onInfoTooltipPopup] = React.useState(false);
   const [isLuckInfoTooltip, setLuckInfoTooltip] = React.useState(null);
-  const [islogOn, setlogOn] = React.useState(null);
+  const [islogOn, setlogOn] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
   const history = useHistory();
   const [selectedCard, setSelectedCard] = React.useState({link: '', name: ''});
@@ -128,32 +128,30 @@ function App() {
 
 
   React.useEffect(() => {
-    setIsLoading(false);
+
     handleIsToken();
     setLuckInfoTooltip(false);
   }, // eslint-disable-next-line
-   [])
+  [])
 
   function handleIsToken() {
+    setIsLoading(true);
 
-    setIsLoading(false);
-    let jwt = localStorage.getItem("jwt");
-    if (islogOn !== null) {
-      checkToken(jwt)
+      checkToken()
         .then((res) => {
-          setUserEmail(res.email);
           setlogOn(true);
-          setIsLoading(true);
+          setIsLoading(false);
+          setUserEmail(res.email); 
           history.push("/");
         })
         .catch(() => {
           setLuckInfoTooltip(false);
           onInfoTooltipPopup(true);
         })
-    } else {
-      setIsLoading(false);
-      return;
-    }
+        .finally(()=>setIsLoading(false))
+   
+      
+  
   }
 
   function handleIsRegister(data) {
@@ -173,11 +171,11 @@ function App() {
   function handleIsLogin(data) {
     login(data)
       .then((res) => {
-        if (res.jwt) {
-          localStorage.setItem("jwt", res.jwt);
+        if (res.id) {
+          localStorage.setItem("id", res.id);
           setlogOn(true);
           handleIsToken();
-          history.push('/');
+          history.push("/");
         }
         
       })
@@ -188,9 +186,9 @@ function App() {
   }
 
   function handleSignOut() {
-    setlogOn(null);
+    setlogOn(false);
     history.push("/sign-in");
-    localStorage.removeItem("jwt");
+    localStorage.removeItem("id");
     setUserEmail("");
     setUserPassword("");
     setLuckInfoTooltip(null);
@@ -199,8 +197,8 @@ function App() {
   
   React.useEffect(() => {
 
-    if (islogOn !== null) {
-      Promise.all([api.getUser(localStorage.getItem("jwt")), api.getInitialCards(localStorage.getItem("jwt"))])
+    if (islogOn === true) {
+      Promise.all([api.getUser(), api.getInitialCards()])
         .then(([userData, cards]) => {
           setCurrentUser(userData);
           setCards(cards)
@@ -208,6 +206,7 @@ function App() {
         .catch((err) => {
           console.log(err);
         })
+      
     }
   }, // eslint-disable-next-line
    [islogOn])
