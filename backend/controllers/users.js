@@ -125,9 +125,9 @@ const login = (req, res, next) => {
       res.cookie('jwt', `Bearer ${token}`, {
         maxAge: 3600000,
         httpOnly: true,
-        domain: '.lina.front.nomoredomains.work',
-        // sameSite: 'none',
-        // secure: true,
+        // domain: '.lina.front.nomoredomains.work',
+        sameSite: 'none',
+        secure: true,
       })
         .status(200).send({ id: user._id });
     })
