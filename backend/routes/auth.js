@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { login, createUser } = require('../controllers/users');
+const { login, createUser, logout } = require('../controllers/users');
 const {
   validatySigUp,
   validatySigIn,
@@ -7,5 +7,6 @@ const {
 
 router.post('/signin', validatySigIn, login);
 router.post('/signup', validatySigUp, createUser);
+router.get('/logout', logout);
 
 module.exports = router;

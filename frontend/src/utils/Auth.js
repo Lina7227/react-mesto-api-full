@@ -40,7 +40,20 @@ export const login = ({email, password}) => {
     .then(response => handleResponse(response));
 }
 
-export const checkToken = (token) => {
+export const logout = () => {
+  return fetch(`${BASE_URL}/logout`, {
+      method: "GET",
+      credentials: 'include',
+      headers: {
+        "Accept": "application/json", 
+        "Content-Type": "application/json",
+      },
+  })
+  .then(response => handleResponse(response));
+}
+
+
+export const checkToken = () => {
     return fetch(`${BASE_URL}/users/me`, {
       method: "GET",
       credentials: 'include',

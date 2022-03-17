@@ -107,6 +107,15 @@ const updateUserAvatar = (req, res, next) => {
     });
 };
 
+const logout = (req, res, next) => {
+  try {
+    res.clearCookie('jwt');
+    res.status(200).send({ message: 'Выход из аккаутна успешно совершен' });
+  } catch (err) {
+    next(err);
+  }
+};
+
 const login = (req, res, next) => {
   const { email, password } = req.body;
 
@@ -116,6 +125,7 @@ const login = (req, res, next) => {
       res.cookie('jwt', `Bearer ${token}`, {
         maxAge: 3600000,
         httpOnly: true,
+        domain: 'api.lina.front.nomoredomains.work',
         sameSite: 'none',
         secure: true,
       })
@@ -134,4 +144,5 @@ module.exports = {
   updateUserInfo,
   updateUserAvatar,
   login,
+  logout,
 };

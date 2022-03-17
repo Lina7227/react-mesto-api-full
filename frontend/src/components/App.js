@@ -12,7 +12,7 @@ import DeleteCardPopup from './DeleteCardPopup';
 import ProtectedRoute from './ProtectedRoute';
 import Login from './Login';
 import Register from './Register';
-import { register, login, checkToken } from '../utils/Auth';
+import { register, login, checkToken, logout } from '../utils/Auth';
 import InfoTooltip from './InfoTooltip';
 import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 
@@ -25,7 +25,7 @@ function App() {
   const [isInfoTooltipPopup, onInfoTooltipPopup] = React.useState(false);
   const [isLuckInfoTooltip, setLuckInfoTooltip] = React.useState(null);
   const [islogOn, setlogOn] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(false);
   const history = useHistory();
   const [selectedCard, setSelectedCard] = React.useState({link: '', name: ''});
   const [currentUser, setCurrentUser] = React.useState({});
@@ -128,30 +128,23 @@ function App() {
 
 
   React.useEffect(() => {
-
     handleIsToken();
-    setLuckInfoTooltip(false);
   }, // eslint-disable-next-line
   [])
 
   function handleIsToken() {
-    setIsLoading(true);
-
-      checkToken()
-        .then((res) => {
-          setlogOn(true);
-          setIsLoading(false);
+    checkToken()
+      .then((res) => {
           setUserEmail(res.email); 
+          setlogOn(true);
+          setIsLoading(true);
           history.push("/");
-        })
-        .catch(() => {
-          setLuckInfoTooltip(false);
-          onInfoTooltipPopup(true);
-        })
-        .finally(()=>setIsLoading(false))
-   
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(()=>setIsLoading(false));
       
-  
   }
 
   function handleIsRegister(data) {
@@ -173,11 +166,9 @@ function App() {
       .then((res) => {
         if (res.id) {
           localStorage.setItem("id", res.id);
-          setlogOn(true);
           handleIsToken();
           history.push("/");
         }
-        
       })
       .catch(async  () => {
         setLuckInfoTooltip(false);
@@ -189,6 +180,7 @@ function App() {
     setlogOn(false);
     history.push("/sign-in");
     localStorage.removeItem("id");
+    logout();
     setUserEmail("");
     setUserPassword("");
     setLuckInfoTooltip(null);
@@ -196,7 +188,6 @@ function App() {
   }
   
   React.useEffect(() => {
-
     if (islogOn === true) {
       Promise.all([api.getUser(), api.getInitialCards()])
         .then(([userData, cards]) => {
