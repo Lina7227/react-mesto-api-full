@@ -11,13 +11,15 @@ const corsOptions = require('./utils/utils');
 
 const app = express();
 
-const { NODE_ENV, PORT } = process.env;
+const { MONGODB_URL, NODE_ENV, PORT } = process.env;
 
 app.use(corsOptions);
 
 app.use(cookieParser());
 
-mongoose.connect('mongodb://localhost:27017/mestodb', {
+const BD_URL = NODE_ENV === 'production' ? MONGODB_URL : 'mongodb://localhost:27017/mestodb';
+
+mongoose.connect(BD_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
