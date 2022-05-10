@@ -1,4 +1,4 @@
-export const BASE_URL  = 'https://api.lina.front.nomoredomains.work';
+export const BASE_URL  = 'https://card-mesto.herokuapp.com';
 // export const BASE_URL  = 'http://localhost:3000';
 
 // возврат ответа сервера об ошибке
