@@ -109,8 +109,8 @@ class Api{
 }
 
 const apiConfigg = {
-    baseUrl: 'https://card-mesto.herokuapp.com',
-    // baseUrl: 'http://localhost:3000',
+    // baseUrl: 'https://card-mesto.herokuapp.com',
+    baseUrl: 'http://localhost:3000',
 }
 
 // отправка запросов

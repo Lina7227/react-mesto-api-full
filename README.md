@@ -32,6 +32,5 @@
 > чтобы собрать поект введите `npm run build`.
 
 ## Ссылки: 
-Ссылка на frontend проекта: [lina.front.nomoredomains.xyz](https://lina.front.nomoredomains.xyz)
-Ссылка на backend проекта:  [api.lina.front.nomoredomains.work](https://api.lina.front.nomoredomains.work)
-IPv4: 51.250.26.241
+Ссылка на frontend проекта: [https://react-mesto-api-full-one-lina7227.vercel.app](https://react-mesto-api-full-one-lina7227.vercel.app)
+Ссылка на backend проекта:  [https://card-mesto.herokuapp.com](https://card-mesto.herokuapp.com)

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -14,7 +15,6 @@ import Login from './Login';
 import Register from './Register';
 import { register, login, checkToken, logout } from '../utils/Auth';
 import InfoTooltip from './InfoTooltip';
-import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 
 function App() {
 
@@ -126,39 +126,42 @@ function App() {
     selectedCard
   ]);
 
+  React.useEffect(() => {
+    if (islogOn === true) {
+      Promise.all([api.getUser(), api.getInitialCards()])
+        .then(([userData, cards]) => {
+          setCurrentUser(userData);
+          setCards(cards)
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+  }, // eslint-disable-next-line
+  [islogOn]);
 
   React.useEffect(() => {
-    handleIsToken();
+    if (islogOn === true){
+      handleIsToken();
+    }
   }, // eslint-disable-next-line
-  [])
+  [islogOn]);
 
   function handleIsToken() {
+    console.log('Эрлло')
     checkToken()
       .then((res) => {
-          setUserEmail(res.email); 
-          setlogOn(true);
-          setIsLoading(true);
-          history.push("/");
+        
+        setUserEmail(res.email);  
+        setlogOn(true);
+        
+        setIsLoading(true);
+        history.push("/");
       })
       .catch((err) => {
         console.error(err);
       })
-      .finally(()=>setIsLoading(false));
-      
-  }
-
-  function handleIsRegister(data) {
-    register(data)
-      .then((res) => {
-        setUserEmail(res.email);
-        setUserPassword(data.password);
-        setLuckInfoTooltip(true);
-        onInfoTooltipPopup(true);
-      })
-      .catch(() => {
-        setLuckInfoTooltip(false);
-        onInfoTooltipPopup(true);
-      })
+      .finally(() => setIsLoading(false));
   }
 
   function handleIsLogin(data) {
@@ -167,14 +170,32 @@ function App() {
         if (res.id) {
           localStorage.setItem("id", res.id);
           handleIsToken();
-          history.push("/");
+          // history.push("/");
         }
       })
-      .catch(async  () => {
+      .catch(() => {
         setLuckInfoTooltip(false);
         onInfoTooltipPopup(true);
       })
   }
+
+  function handleIsRegister(data) {
+    register(data)
+      .then((res) => {
+        setUserEmail(res.email);
+        setUserPassword(data.password);
+        handleIsLogin(data);
+        setLuckInfoTooltip(true);
+        onInfoTooltipPopup(true);
+        history.push("/");
+      })
+      .catch(() => {
+        setLuckInfoTooltip(false);
+        onInfoTooltipPopup(true);
+      })
+  }
+
+ 
 
   function handleSignOut() {
     setlogOn(false);
@@ -186,21 +207,6 @@ function App() {
     setLuckInfoTooltip(null);
     setIsLoading(false);
   }
-  
-  React.useEffect(() => {
-    if (islogOn === true) {
-      Promise.all([api.getUser(), api.getInitialCards()])
-        .then(([userData, cards]) => {
-          setCurrentUser(userData);
-          setCards(cards)
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-      
-    }
-  }, // eslint-disable-next-line
-   [islogOn])
 
   function handleCardLike(card) {
       
