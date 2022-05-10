@@ -109,7 +109,7 @@ class Api{
 }
 
 const apiConfigg = {
-    baseUrl: 'https://api.lina.front.nomoredomains.work',
+    baseUrl: 'https://card-mesto.herokuapp.com',
     // baseUrl: 'http://localhost:3000',
 }
 

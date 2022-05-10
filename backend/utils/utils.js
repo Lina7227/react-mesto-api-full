@@ -1,5 +1,5 @@
 const corsOptions = [
-  'https://api.lina.front.nomoredomains.work',
+  'https://card-mesto.herokuapp.com',
   'https://lina.front.nomoredomains.xyz',
   'http://localhost:3001',
   'http://localhost:3000',
