@@ -1,9 +1,9 @@
 const corsOptions = [
   'https://card-mesto.herokuapp.com',
-  'https://react-mesto-api-full-hyyn2rkzq-lina7227.vercel.app',
-  'https://react-mesto-api-full-git-main-lina7227.vercel.app',
-  'https://react-mesto-api-full-lina7227.vercel.app',
-  'https://react-mesto-api-full-orpin.vercel.app',
+  'https://react-mesto-api-full-j4gcd95l1-lina7227.vercel.app',
+  'https://react-mesto-api-full-one-lina7227.vercel.app',
+  'https://react-mesto-api-full-one-git-main-lina7227.vercel.app',
+  'https://react-mesto-api-full-one-three.vercel.app',
   'http://localhost:3001',
   'http://localhost:3000',
   'https://web.postman.co',

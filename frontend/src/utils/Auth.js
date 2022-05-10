@@ -1,5 +1,5 @@
-export const BASE_URL  = 'https://card-mesto.herokuapp.com';
-// export const BASE_URL  = 'http://localhost:3000';
+// export const BASE_URL  = 'https://card-mesto.herokuapp.com';
+export const BASE_URL  = 'http://localhost:3000';
 
 // возврат ответа сервера об ошибке
 const handleResponse = (res) => {
@@ -54,13 +54,15 @@ export const logout = () => {
 
 
 export const checkToken = () => {
-    return fetch(`${BASE_URL}/users/me`, {
+  return fetch(`${BASE_URL}/users/me`, {
       method: "GET",
-      credentials: 'include',
+      credentials: "include",
       headers: {
-        'Accept': 'application/json',
-        "Content-Type": "application/json",
+          "Content-Type": "application/json",
+          "Accept": "application/json",
       },
-    })
-    .then(response => handleResponse(response));
+  })
+  .then(response => handleResponse(response));
 }
+
+
